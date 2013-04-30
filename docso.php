@@ -56,15 +56,20 @@ class VN_Num {
 	var $force_pad;
 	var $debug=0;
 	function __construct($num) {
+		if (!is_numeric($num))
+			return false;
 		$this->num = $num;
 		$this->len = strlen($num);
 		if ($this->len > 15 ) {
-			return array(false, "I can't read this num too long");
+			return false;
 		}
 	}
 
 	function doit() {
-		if ($this->len > 15 ) return "I can't read this";
+		if ($this->len > 15 ) return "số này dài quá, không dọc được";
+		if ($this->len ==0) return "cái gì đấy";
+
+
 		$num_str = number_format($this->num);
 		if ($this->len < 4  ){
 			$ans[] = $this->read_nums($this->num);
